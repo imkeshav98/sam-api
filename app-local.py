@@ -9,7 +9,6 @@ import json
 # Import SAM 2 dependencies
 from sam2.build_sam import build_sam2
 from sam2.automatic_mask_generator import SAM2AutomaticMaskGenerator
-from sam2.utils.misc import variant_to_config_mapping
 
 # Initialize Flask app
 app = Flask(__name__)
