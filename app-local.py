@@ -32,7 +32,7 @@ MODEL_CFG = "sam2.1_hiera_l.yaml"
 # so we need to clear the hydra instance
 hydra.core.global_hydra.GlobalHydra.instance().clear()
 # reinit hydra with a new search path for configs
-hydra.initialize_config_module('./sam2_configs', version_base='1.2')
+hydra.initialize_config_module('sam2_configs', version_base='1.2')
 
 sam2 = build_sam2(MODEL_CFG, SAM2_CHECKPOINT, device=device, apply_postprocessing=True)
 mask_generator = SAM2AutomaticMaskGenerator(sam2)
