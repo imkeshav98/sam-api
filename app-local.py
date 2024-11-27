@@ -23,6 +23,9 @@ elif torch.backends.mps.is_available():
 else:
     device = torch.device("cpu")
 
+# Log device
+print(f"Using device: {device}")
+
 # Load SAM 2 model
 mask_generator = SAM2AutomaticMaskGenerator.from_pretrained("facebook/sam2.1-hiera-large")
 
@@ -99,7 +102,7 @@ def save_json_data(masks, output_json_path):
     mask_data = []
     for mask_info in masks:
         mask_data.append({
-            'segmentation': mask_info['segmentation'].tolist(),
+            # 'segmentation': mask_info['segmentation'].tolist(),
             'area': int(mask_info['area']),
             'bbox': [int(x) for x in mask_info['bbox']],
             'predicted_iou': float(mask_info['predicted_iou']),
