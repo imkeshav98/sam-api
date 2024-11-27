@@ -24,8 +24,8 @@ else:
     device = torch.device("cpu")
 
 # Load SAM 2 model
-SAM2_CHECKPOINT = "./checkpoints/sam2.1_hiera_large.pt"
-MODEL_CFG = "./configs/sam2.1_hiera_l.yaml"
+SAM2_CHECKPOINT = "checkpoints/sam2.1_hiera_large.pt"
+MODEL_CFG = "configs/sam2.1_hiera_l.yaml"
 
 sam2 = build_sam2(MODEL_CFG, SAM2_CHECKPOINT, device=device, apply_postprocessing=False)
 mask_generator = SAM2AutomaticMaskGenerator(
