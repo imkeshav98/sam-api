@@ -25,7 +25,7 @@ else:
 
 # Load SAM 2 model
 SAM2_CHECKPOINT = "checkpoints/sam2.1_hiera_large.pt"
-MODEL_CFG = "sam2.1_hiera_l.yaml"
+MODEL_CFG = "sam2.1_hiera_l"
 
 sam2 = build_sam2(MODEL_CFG, SAM2_CHECKPOINT, device=device, apply_postprocessing=True)
 mask_generator = SAM2AutomaticMaskGenerator(sam2)
