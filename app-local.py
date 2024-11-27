@@ -9,10 +9,9 @@ import json
 # Import SAM 2 dependencies
 from sam2.build_sam import build_sam2
 from sam2.automatic_mask_generator import SAM2AutomaticMaskGenerator
+from sam2.utils.misc import variant_to_config_mapping
 
 # Initialize Flask app
-from flask import Flask, jsonify
-
 app = Flask(__name__)
 
 # Device selection
@@ -23,11 +22,12 @@ elif torch.backends.mps.is_available():
 else:
     device = torch.device("cpu")
 
-# Log device
-print(f"Using device: {device}")
-
 # Load SAM 2 model
-mask_generator = SAM2AutomaticMaskGenerator.from_pretrained("facebook/sam2.1-hiera-large")
+SAM2_CHECKPOINT = "checkpoints/sam2.1_hiera_large.pt"
+MODEL_CFG = "configs/sam2.1_hiera_l.yaml"
+
+sam2 = build_sam2(MODEL_CFG, SAM2_CHECKPOINT, device=device, apply_postprocessing=True)
+mask_generator = SAM2AutomaticMaskGenerator(sam2)
 
 def generate_masked_image(image_array, masks):
     """
