@@ -5,6 +5,8 @@ import numpy as np
 import torch
 from PIL import Image
 import json
+import flask
+from flask import Flask, request, jsonify
 
 # Import SAM 2 dependencies
 from sam2.build_sam import build_sam2
