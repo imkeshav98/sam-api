@@ -23,8 +23,7 @@ elif torch.backends.mps.is_available():
 else:
     device = torch.device("cpu")
 
-
-sam2 = build_sam2(MODEL_CFG, SAM2_CHECKPOINT, device=device, apply_postprocessing=False)
+# Load SAM 2 model
 mask_generator = SAM2AutomaticMaskGenerator.from_pretrained("facebook/sam2.1-hiera-large")
 
 def generate_masked_image(image_array, masks):
