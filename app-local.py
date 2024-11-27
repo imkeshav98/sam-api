@@ -7,6 +7,7 @@ from PIL import Image
 import json
 import flask
 from flask import Flask, request, jsonify
+import hydra
 
 # Import SAM 2 dependencies
 from sam2.build_sam import build_sam2
@@ -26,6 +27,12 @@ else:
 # Load SAM 2 model
 SAM2_CHECKPOINT = "checkpoints/sam2.1_hiera_large.pt"
 MODEL_CFG = "sam2.1_hiera_l.yaml"
+
+# hydra is initialized on import of sam2, which sets the search path which can't be modified
+# so we need to clear the hydra instance
+hydra.core.global_hydra.GlobalHydra.instance().clear()
+# reinit hydra with a new search path for configs
+hydra.initialize_config_module('./sam2_configs', version_base='1.2')
 
 sam2 = build_sam2(MODEL_CFG, SAM2_CHECKPOINT, device=device, apply_postprocessing=True)
 mask_generator = SAM2AutomaticMaskGenerator(sam2)
